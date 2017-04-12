@@ -9,6 +9,7 @@ import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -25,8 +26,9 @@ public class Main {
     public static void main(String... args) throws AWTException, IOException, InterruptedException {
 
         Robot robot = new Robot();
-        int width = 1920;
-        int height = 1080;
+        int width = Toolkit.getDefaultToolkit().getScreenSize().width;
+        int height = Toolkit.getDefaultToolkit().getScreenSize().height;
+        
         Thread.sleep(30000);
         System.out.println("get screen page");
         Rectangle area = new Rectangle(0, 0, width, height);
@@ -38,18 +40,18 @@ public class Main {
                 if ((color.getRed() == 212 && color.getGreen() == 14 && color.getBlue() == 229) | (color.getRed() == 236 && color.getGreen() == 165 && color.getBlue() == 33)) {
                     System.out.println("mouse move="+x+":"+y);
                     robot.mouseMove(x, y);
-                    Thread.sleep(1000);
+                    Thread.sleep(1000+(Math.round(1L)*3));
                     System.out.println("mouse click="+x+":"+y);
                     robot.mousePress(InputEvent.BUTTON1_MASK);
                     robot.mouseRelease(InputEvent.BUTTON1_MASK);
-                    Thread.sleep(1000);
+                    Thread.sleep(1000+(Math.round(1L)*3));
                     subSearch(x, y, robot);
                     robot.keyPress(KeyEvent.VK_CONTROL);
                     robot.keyPress(KeyEvent.VK_W);
                     robot.keyRelease(KeyEvent.VK_W);
                     robot.keyRelease(KeyEvent.VK_CONTROL);
                     System.out.println(x + " " + y);
-                    Thread.sleep(1000);
+                    Thread.sleep(1000+(Math.round(1L)*3));
                     bufferedImage = robot.createScreenCapture(area);
                 }
 
@@ -68,7 +70,7 @@ public class Main {
                 Color color = new Color(bufferedImage.getRGB(x, y));
                 if (color.getRed() == 255 && color.getGreen() == 0 && color.getBlue() == 0) {
                     Thread.sleep(1000);
-                    robot.mouseMove(x + posX, y + posY);
+                    robot.mouseMove(x + posX+(Math.round(1L)*3), y + posY+(Math.round(1L)*3));
                     Thread.sleep(1000);
                     robot.mousePress(InputEvent.BUTTON1_MASK);
                     robot.mouseRelease(InputEvent.BUTTON1_MASK);
