@@ -70,7 +70,7 @@ public class Main {
                 Color color = new Color(bufferedImage.getRGB(x, y));
                 if (color.getRed() == 255 && color.getGreen() == 0 && color.getBlue() == 0) {
                     Thread.sleep(1000);
-                    robot.mouseMove(x + posX+(Math.round(1L)*3), y + posY+(Math.round(1L)*3));
+                    robot.mouseMove(x + posX, y + posY);
                     Thread.sleep(1000);
                     robot.mousePress(InputEvent.BUTTON1_MASK);
                     robot.mouseRelease(InputEvent.BUTTON1_MASK);
